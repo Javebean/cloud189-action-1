@@ -29,7 +29,7 @@
 
    ![image-20200727142617807](https://i.loli.net/2020/07/27/3cXnHYIbOxfQDZh.png)
 
-### 四、查看运行结果
+### 四、查看运行结果..
 > Actions --> 签到 --> build
 >
 > 能看到如下图所示，表示成功
