@@ -138,7 +138,7 @@ def calculate_md5_sign(params):
 
 def login(username, password):
     url = "https://cloud.189.cn/udb/udb_login.jsp?pageId=1&redirectURL=/main.action"
-    r = s.get(url)r
+    r = s.get(url)
     print(f"--------geturl...{r}")
     captchaToken = re.findall(r"captchaToken' value='(.+?)'", r.text)[0]
     lt = re.findall(r'lt = "(.+?)"', r.text)[0]
