@@ -37,12 +37,16 @@ def main():
     else:
         print(f"已经签到过了，签到获得{netdiskBonus}M空间")
         signStr = f"已经签到过了，签到获得{netdiskBonus}M空间"
+    '''
     headers = {
         'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; SM-G930K Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 Ecloud/8.6.3 Android/22 clientId/355325117317828 clientModel/SM-G930K imsi/460071114317824 clientChannelId/qq proVersion/1.0.6',
         "Referer": "https://m.cloud.189.cn/zhuanti/2016/sign/index.jsp?albumBackupOpened=1",
         "Host": "m.cloud.189.cn",
         "Accept-Encoding": "gzip, deflate",
     }
+    '''
+    push('tianyi',signStr)
+    
     response = s.get(url, headers=headers)
     cjStr1=''
     if ("errorCode" in response.text):
@@ -51,39 +55,31 @@ def main():
         description = response.json()['description']
         print(f"抽奖获得{description}")
         cjStr1 = f"抽奖获得{description}"
-
+    push('tianyi',cjStr1)
+    
     response = s.get(url2, headers=headers)
     cjStr2=''
     if ("errorCode" in response.text):
         print(response.text)
     else:
         description = response.json()['description']
-        print(f"抽奖获得{description}")
-        cjStr2 = f"抽奖获得{description}"
+        print(f"*抽奖获得{description}")
+        cjStr2 = f"*抽奖获得{description}"
+    push('tianyi',cjStr2)
 
-    now_time = datetime.datetime.now()
-    bj_time = now_time + datetime.timedelta(hours=8)
-    desp = f"""
-    ------
-    ### 🚁Now：
-    ```
-    {bj_time.strftime("%Y-%m-%d %H:%M:%S %p")}
-    ```
-    ### ✨签到：
-    ```
-    {signStr}
-    ```
+    
 
-    ### 🚀抽奖:
-    ```
-    {cjStr1}
-    {cjStr2}
-    ```
-    """
-    requests.post('https://sc.ftqq.com/SCU74663T20ed2886a458ab9e3be21f3de4e8fd965e0b13de3ff1b.send', data={
-    'text':bj_time.strftime("%Y-%m-%d %H:%M:%S %p")+'天翼云盘打卡',
-    'desp':desp
-})
+#bark push
+def push(title, content):
+    print(title+"\n"+content)
+    print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+    url = "https://api.day.app/"+Bark_token+"/"+title+"/"+content+"?group=DayCheck"
+    res = requests.get(url=url).text
+    # 输出发送结果
+    print(url)
+    print(res)
+   
+    
 
 BI_RM = list("0123456789abcdefghijklmnopqrstuvwxyz")
 
