@@ -5,10 +5,11 @@ import re
 import rsa
 import json
 import base64
+import os
 from urllib import parse
 
 s = requests.Session()
-
+Bark_token = os.environ['BARK']  # BARK
 username = ""
 password = ""
 
