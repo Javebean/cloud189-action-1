@@ -46,7 +46,7 @@ def main():
         "Accept-Encoding": "gzip, deflate",
     }
     '''
-    push('tianyi',signStr)
+    push('TianyiCheck',signStr)
     
     response = s.get(url, headers=headers)
     cjStr1=''
@@ -56,7 +56,7 @@ def main():
         description = response.json()['description']
         print(f"抽奖获得{description}")
         cjStr1 = f"抽奖获得{description}"
-    push('tianyi',cjStr1)
+        push('tianyi-抽奖',cjStr1)
     
     response = s.get(url2, headers=headers)
     cjStr2=''
@@ -66,18 +66,18 @@ def main():
         description = response.json()['description']
         print(f"*抽奖获得{description}")
         cjStr2 = f"*抽奖获得{description}"
-    push('tianyi',cjStr2)
+        push('tianyi-抽奖2',cjStr2)
 
     
 
 #bark push
 def push(title, content):
-    print(title+"\n"+content)
+    #print(title+"\n"+content)
     print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
     url = "https://api.day.app/"+Bark_token+"/"+title+"/"+content+"?group=DayCheck"
     res = requests.get(url=url).text
     # 输出发送结果
-    print(url)
+    #print(url)
     print(res)
    
     
