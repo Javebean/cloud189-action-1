@@ -54,7 +54,7 @@ def main():
         print(response.text)
     else:
         description = response.json()['description']
-        print(f"抽奖获得{description}")
+        print(f"抽奖获得{response}")
         cjStr1 = f"抽奖获得{description}"
         push('tianyi-抽奖',cjStr1)
     
@@ -64,7 +64,7 @@ def main():
         print(response.text)
     else:
         description = response.json()['description']
-        print(f"*抽奖获得{description}")
+        print(f"*抽奖获得{response}")
         cjStr2 = f"*抽奖获得{description}"
         push('tianyi-抽奖2',cjStr2)
 
@@ -73,6 +73,8 @@ def main():
 #bark push
 def push(title, content):
     #print(title+"\n"+content)
+    os.environ['TZ'] = 'Asia/Shanghai' #Asia/Shanghai or zh-cn 
+    time.tzset()
     print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
     url = "https://api.day.app/"+Bark_token+"/"+title+"/"+content+"?group=DayCheck"
     res = requests.get(url=url).text
