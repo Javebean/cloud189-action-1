@@ -64,7 +64,7 @@ def main():
         print(response.text)
     else:
         description = response.json()['description']
-        print(str(response))
+        str(response.json())
         cjStr2 = f"*抽奖获得{description}"
         push('tianyi-抽奖2',cjStr2)
 
