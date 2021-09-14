@@ -54,7 +54,10 @@ def main():
         print(response.text)
     else:
         description = response.json()['description']
-        print(str(response))
+        # Convert bytes to string type and string type to dict
+        string = response.read().decode('utf-8')
+        json_obj = json.loads(string)
+        print(json_obj['source_name']) # pr
         cjStr1 = f"抽奖获得{description}"
         push('tianyi-抽奖',cjStr1)
     
@@ -64,7 +67,7 @@ def main():
         print(response.text)
     else:
         description = response.json()['description']
-        print(str(response.json()))
+        print(response.json())
         cjStr2 = f"*抽奖获得{description}"
         push('tianyi-抽奖2',cjStr2)
 
